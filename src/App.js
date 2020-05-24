@@ -12,6 +12,7 @@ class DBPedia extends Component {
       result: '',
       trigger: false,
     };
+    this.myRef = React.createRef();
   }
 
   componentDidMount() {
@@ -26,17 +27,20 @@ class DBPedia extends Component {
         loading : false,
         result: res.value,
       })
-      this.props.triggerNextStep({nextStep :  res.next , next : true});
+      res.next.map( next => {
+        return this.props.triggerNextStep({nextStep :  next , next : true});
+      })     
     })
     
   }
 
   render() {
-    const { loading, result } = this.state;
-
+    const { loading } = this.state;
+    let dom = this.myRef && this.myRef.parent
+    console.log(dom)
     return (
-      <div className="dbpedia">
-        { loading ? <Loading /> : result }
+      <div ref={this.myRef}>
+        { loading ? <Loading /> : null }
       </div>
     );
   }
