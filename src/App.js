@@ -1,62 +1,65 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ChatBot, { Loading } from './react-simple-chatbot/lib/index';
-import {promise} from './server'
+import ChatBox from './Container/Chatbox'
+import {server} from './server'
 
-class DBPedia extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true,
-      result: '',
-      trigger: false,
-    };
-    this.myRef = React.createRef();
-  }
+class CustomChatBoat extends Component {
+  state = {
+    loading: true,
+    result: '',
+    trigger: false,
+    nextStep : []
+  };
 
   componentDidMount() {
-
     const { previousStep } = this.props;
     const value = previousStep.message;
-    
-    let extra = Math.floor(Math.random() * 3 + 1);
-
-    promise("reply", value, extra).then((res) => {
+    server("reply", value).then((res) => {
       this.setState({ 
         loading : false,
         result: res.value,
       })
-      res.next.map( next => {
-        return this.props.triggerNextStep({nextStep :  next , next : true});
-      })     
+     
+      this.setState({
+         nextStep : res.next
+      })
+
     })
     
   }
 
+  handleClick = (event) => {
+      let nextStep = {    
+          id: "message",
+          message: event.target.name,
+          trigger: "user"
+      }
+      
+      this.props.triggerNextStep({nextStep : nextStep , next : true});
+      server("reply",  event.target.name).then((res) => {
+        this.setState({ 
+          loading : false,
+          result: res.value,
+        })
+        this.setState({
+           nextStep : res.next
+        })
+  
+      })
+  }
+
   render() {
     const { loading } = this.state;
-    let dom = this.myRef && this.myRef.parent
-    console.log(dom)
     return (
-      <div ref={this.myRef}>
-        { loading ? <Loading /> : null }
+      <div>
+        { loading ? <Loading /> : <ChatBox handleClick={this.handleClick}  steps={this.state.nextStep}/> }
       </div>
     );
   }
 }
 
-DBPedia.propTypes = {
-  steps: PropTypes.object,
-  triggerNextStep: PropTypes.func,
-};
 
-DBPedia.defaultProps = {
-  steps: undefined,
-  triggerNextStep: undefined,
-};
-
-class ExampleDBPedia extends Component {
+class ChatBotComponent extends Component {
   state = {
     steps: []
   }
@@ -75,31 +78,33 @@ class ExampleDBPedia extends Component {
         },
         {
           id: '3',
-          component: <DBPedia />,
+          component: <CustomChatBoat/>,
           waitAction: true,
           trigger: 'user',
         }
-    ]
-      
+    ] 
       this.setState({
         steps
       })
+
       localStorage.clear()
   }
    
 
   render() {
     let steps =  this.state.steps
-    if(steps.length === 0 ){
-      return <Loading/>
-    }
-    return (
-      <ChatBot
-        opened={true}
-        steps={steps}
-      />
-    )
+      if(steps.length === 0 ){
+        return <Loading/>
+      }
+      return (
+        <div className="chatbot">
+          <ChatBot
+            steps={steps}
+          />
+        </div>
+       
+      )
   }
   
 }
-export default ExampleDBPedia;
+export default ChatBotComponent;
