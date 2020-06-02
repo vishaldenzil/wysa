@@ -14,26 +14,29 @@ class CustomChatBoat extends Component {
   componentDidMount() {
     const { previousStep } = this.props;
     const value = previousStep.message;
+    this.setState({nextStep : []})
     server("reply", value).then((res) => {
-      this.setState({ 
-        loading : false,
-        result: res.value,
-      })
-     
       this.setState({
+         loading : false,
          nextStep : res.next
       })
-
     })
     
   }
 
   handleClick = (event) => {
+
+      this.setState({
+        nextStep : []
+      })
+      
+
       let nextStep = {    
           id: "message",
           message: event.target.name,
           trigger: "user"
       }
+
       
       this.props.triggerNextStep({nextStep : nextStep , next : true});
       server("reply",  event.target.name).then((res) => {
