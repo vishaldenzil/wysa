@@ -1,10 +1,5 @@
 .chatbot_message {
     position: absolute;
-    bottom:50px;
+    bottom:-13px;
     left: 0px;
-}
-
-.rsc-content {
-    margin-bottom: 60px;
-    z-index: 10;
 }
