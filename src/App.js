@@ -20,25 +20,23 @@ class CustomChatBoat extends Component {
          loading : false,
          nextStep : res.next
       })
+      let nextStep = {
+        id: 'user',
+        user: true,
+        trigger: '3',
+        }
+          this.props.triggerNextStep({nextStep : nextStep , next : true});
     }) 
   }
 
   handleClick = (event) => {
       let name = event.target.name;
-
-      this.setState({
-        nextStep : [],
-        loading : true,
-      } ,() =>{
-            let nextStep = {    
-              id: "message",
-              message: name,
-              trigger: "3"
-          }  
-          this.props.triggerNextStep({nextStep : nextStep , next : true});
-      })
-    
-      
+      let nextStep = {    
+          id: "message",
+          message: name,
+          trigger: "3"
+      }  
+      this.props.triggerNextStep({nextStep : nextStep , next : true});     
   }
 
   render() {
@@ -80,7 +78,6 @@ class ChatBotComponent extends Component {
         steps
       })
 
-      localStorage.clear()
   }
    
 
