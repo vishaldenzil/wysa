@@ -22,6 +22,7 @@ const randomJson = () => {
     json = {
       next: [
         {
+          type : 'options',
           id: "sad",
           options: [
             { value: "1", label: "1", trigger: "3" },
@@ -37,6 +38,7 @@ const randomJson = () => {
     json = {
       next: [
         {
+          type : 'image',
           id: "sad",
           options: [
             { value: "red", label: "Red", trigger: "3" },
@@ -52,6 +54,7 @@ const randomJson = () => {
     json = {
       next: [
         {
+          type : 'image',
           id: "sad",
           options: [
             { value: "red", label: "Red", trigger: "3" },

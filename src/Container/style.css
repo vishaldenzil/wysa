@@ -1,5 +1,13 @@
 .chatbot_message {
-    position: absolute;
-    bottom:-13px;
-    left: 0px;
+   display: flex;
 }
+
+
+
+.box_modal {
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
+

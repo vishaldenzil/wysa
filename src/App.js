@@ -20,42 +20,32 @@ class CustomChatBoat extends Component {
          loading : false,
          nextStep : res.next
       })
-    })
-    
+    }) 
   }
 
   handleClick = (event) => {
+      let name = event.target.name;
 
       this.setState({
-        nextStep : []
+        nextStep : [],
+        loading : true,
+      } ,() =>{
+            let nextStep = {    
+              id: "message",
+              message: name,
+              trigger: "3"
+          }  
+          this.props.triggerNextStep({nextStep : nextStep , next : true});
       })
+    
       
-
-      let nextStep = {    
-          id: "message",
-          message: event.target.name,
-          trigger: "user"
-      }
-
-      
-      this.props.triggerNextStep({nextStep : nextStep , next : true});
-      server("reply",  event.target.name).then((res) => {
-        this.setState({ 
-          loading : false,
-          result: res.value,
-        })
-        this.setState({
-           nextStep : res.next
-        })
-  
-      })
   }
 
   render() {
-    const { loading } = this.state;
+    const {loading} = this.state;
     return (
       <div>
-        { loading ? <Loading /> : <ChatBox handleClick={this.handleClick}  steps={this.state.nextStep}/> }
+        { loading ? null : <ChatBox key={loading} handleClick={this.handleClick}  steps={this.state.nextStep}/> }
       </div>
     );
   }
@@ -103,7 +93,7 @@ class ChatBotComponent extends Component {
         <div className="chatbot">
           <ChatBot
             steps={steps}
-          />
+          /> 
         </div>
        
       )
