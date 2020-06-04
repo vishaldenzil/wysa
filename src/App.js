@@ -24,8 +24,8 @@ class CustomChatBoat extends Component {
         id: 'user',
         user: true,
         trigger: '3',
-        }
-          this.props.triggerNextStep({nextStep : nextStep , next : true});
+      }
+       this.props.triggerNextStep({nextStep : nextStep , next : true});
     }) 
   }
 
