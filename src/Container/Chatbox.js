@@ -18,17 +18,6 @@ export default ChatBox;
 
 
 const CurrentStep = (props) => {
-  if (props.type === 'options'){
-  return <ul className="button_options">
-      {props.options.map((option, index) =>
-              (
-                <li className="select_list">
-                   <Button handleClick={props.handleClick} key={index} {...option} {...props}/>
-                </li>         
-              )
-      )}
-  </ul>
-  } else {
     return (<div className="chatbot_message">
             {props.options.map((option, index) =>
                 ( 
@@ -38,24 +27,28 @@ const CurrentStep = (props) => {
                 )
             )}
     </div>)
-
-  }
 }
 
 
+const Cards =  (props) =>  {
+  if(props.extension  === 'gif'){
+     return (<Image {...props} height={160} width={"auto"}/>)
+   }
+
+   return (<Image {...props} height={150} width={"auto"}/>)
+}
+   
 
 
-const Button = (props) =>
-    <button name={props.value} onClick={props.handleClick} className="button">
-        {props.label}
-    </button>
 
 
-const Cards =  (props) =>  
+
+const Image =  (props) => 
     <img 
-      name={props.label} 
-      onClick={props.handleClick} 
-      height="150px" width="150px" 
-      src={props.url} 
-      alt={props.label}
-    />
+    name={props.label} 
+    onClick={props.handleClick} 
+    height={props.height} 
+    width={props.width}
+    src={props.url} 
+    alt={props.label}
+/>

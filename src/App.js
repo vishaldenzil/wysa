@@ -16,16 +16,26 @@ class CustomChatBoat extends Component {
     const value = previousStep.message;
     this.setState({nextStep : []})
     server("reply", value).then((res) => {
-      this.setState({
-         loading : false,
-         nextStep : res.next
-      })
+    
       let nextStep = {
         id: 'user',
         user: true,
         trigger: '3',
       }
-       this.props.triggerNextStep({nextStep : nextStep , next : true});
+
+      let free_text = res.next.filter((e)=> e.type === 'text')
+      free_text.concat(nextStep)
+      free_text.map((text) => {
+        this.props.triggerNextStep({nextStep : text , next : true});
+      })
+
+      let customControl =  res.next.filter((e)=> e.type !== 'text')
+      this.setState({
+        loading : false,
+        nextStep :  customControl
+     })
+        
+      //  this.props.triggerNextStep({nextStep : nextStep , next : true});
     }) 
   }
 

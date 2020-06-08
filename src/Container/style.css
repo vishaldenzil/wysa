@@ -1,7 +1,6 @@
 .chatbot_message {
    display: flex;
    width: 322px;
-   overflow: auto;
    height: 177px;
 }
 
@@ -28,17 +27,9 @@
     transform: scale(0);
 }
 
-.chatbot_message::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
-}
-
-.chatbot_message::-webkit-scrollbar-track {
-    background: white;        /* color of the tracking area */
-}
-.chatbot_message::-webkit-scrollbar-thumb {
-    background-color: black;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid white;  /* creates padding around scroll thumb */
+.video_tag  {
+    width: auto;
+    height: 330px;
 }
 
 
