@@ -47,7 +47,7 @@ const randomJson = () => {
               value: 1,
               label: "Number 1",
               trigger: "3",
-              url: "https://media.giphy.com/media/3orieNX1KVm2F03Dxu/giphy.gif"
+              url: "https://media.giphy.com/media/xUPGGouaS4X287T8FW/giphy.gif"
             }
           ]
         },
@@ -91,8 +91,9 @@ const randomJson = () => {
       next: [
         {
           type: "image",
-          extension: "png",
+          extension: "image/txt",
           id: "sad",
+          text : "Click me",
           options: [
             {
               value: "red",

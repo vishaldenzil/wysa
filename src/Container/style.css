@@ -1,14 +1,11 @@
 .chatbot_message {
    display: flex;
    width: 322px;
-   height: 177px;
 }
 
 .box_modal {
     margin: 5px;
     text-align: center;
-    line-height: 75px;
-    font-size: 30px;
 }
 
 .button_options{
@@ -32,6 +29,31 @@
     height: 330px;
 }
 
+.image_gif {
+    border-radius: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.image_txt{
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+.container{
+    padding: 9px;
+}
+
+.no_link{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: arial, sans-serif;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 
 

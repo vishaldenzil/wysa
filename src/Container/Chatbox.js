@@ -32,19 +32,29 @@ const CurrentStep = (props) => {
 
 const Cards =  (props) =>  {
   if(props.extension  === 'gif'){
-     return (<Image {...props} height={160} width={"auto"}/>)
+     return (<Image className="image_gif" {...props} height={160} width={"182"}/>)
+   }else if(props.extension === 'image/txt') {
+     return <ImageText className="" {...props}/>
    }
 
-   return (<Image {...props} height={150} width={"auto"}/>)
+   return (<Image  className="image_gif" {...props} height={150} width={"auto"}/>)
+}
+
+const ImageText = props => {
+  return (
+    <div class="image_txt">
+      <Image  {...props} height={"auto"} width={"100%"}/>
+      <div class="container">
+        <button name ={"color"} onClick={props.handleClick} className="no_link">{props.text}</button>
+      </div>
+    </div>
+  )
 }
    
 
-
-
-
-
 const Image =  (props) => 
-    <img 
+    <img
+    className={props.className} 
     name={props.label} 
     onClick={props.handleClick} 
     height={props.height} 
